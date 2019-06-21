@@ -1,0 +1,40 @@
+{
+  "name": "rtcstats-wrapper",
+  "version": "1.0.0",
+  "description": "A wrapper of RTCStats for standardization and calculation of momentary values.",
+  "author": "NTT Communications Corp.",
+  "license": "MIT",
+  "homepage": "https://github.com/skyway-lab/rtcstats-wrapper#readme",
+  "keywords": [
+    "WebRTC",
+    "RTCStats"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skyway-lab/rtcstats-wrapper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/skyway-lab/rtcstats-wrapper/issues"
+  },
+  "main": "./dist/rtcstats-wrapper.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest",
+    "dev": "jest --watch",
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-plugin-jest": "^22.7.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
+    "rollup": "^1.15.6",
+    "rollup-jest": "0.0.2"
+  },
+  "dependencies": {
+    "detect-browser": "^4.5.1",
+    "enum": "^2.5.0"
+  }
+}
