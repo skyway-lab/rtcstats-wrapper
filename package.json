@@ -34,7 +34,8 @@
     "rollup-jest": "0.0.2",
     "rollup-plugin-commonjs": "^10.0.1",
     "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-resolve": "^5.2.0"
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "bl": ">=0.9.5"
   },
   "dependencies": {
     "detect-browser": "^4.5.1",
