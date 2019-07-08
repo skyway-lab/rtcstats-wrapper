@@ -1,6 +1,6 @@
 import Enum from "enum";
 
-export const StasReferences = new Enum([
+export const RTCStatsReferences = new Enum([
   "RTCCodecs",
   "RTCInboundRtpVideoStreams",
   "RTCInboundRtpAudioStreams",
@@ -28,9 +28,9 @@ export const StasReferences = new Enum([
   "RTCStunServerConnections"
 ]);
 
-export const StatsReferenceMap = new Map([
+export const RTCStatsReferenceMap = new Map([
   [
-    StasReferences.RTCCodecs.key,
+    RTCStatsReferences.RTCCodecs.key,
     [
       "type",
       "id",
@@ -45,7 +45,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCInboundRtpVideoStreams.key,
+    RTCStatsReferences.RTCInboundRtpVideoStreams.key,
     [
       "timestamp",
       "type",
@@ -86,7 +86,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCInboundRtpAudioStreams.key,
+    RTCStatsReferences.RTCInboundRtpAudioStreams.key,
     [
       "timestamp",
       "type",
@@ -121,7 +121,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCOutboundRtpVideoStreams.key,
+    RTCStatsReferences.RTCOutboundRtpVideoStreams.key,
     [
       "timestamp",
       "type",
@@ -159,7 +159,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCOutboundRtpAudioStreams.key,
+    RTCStatsReferences.RTCOutboundRtpAudioStreams.key,
     [
       "timestamp",
       "type",
@@ -189,7 +189,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCRemoteInboundRtpVideoStreams.key,
+    RTCStatsReferences.RTCRemoteInboundRtpVideoStreams.key,
     [
       "timestamp",
       "type",
@@ -217,7 +217,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCRemoteInboundRtpAudioStreams.key,
+    RTCStatsReferences.RTCRemoteInboundRtpAudioStreams.key,
     [
       "timestamp",
       "type",
@@ -245,7 +245,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCRemoteOutboundRtpVideoStreams.key,
+    RTCStatsReferences.RTCRemoteOutboundRtpVideoStreams.key,
     [
       "timestamp",
       "type",
@@ -264,7 +264,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCRemoteOutboundRtpAudioStreams.key,
+    RTCStatsReferences.RTCRemoteOutboundRtpAudioStreams.key,
     [
       "timestamp",
       "type",
@@ -283,7 +283,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCVideoSources.key,
+    RTCStatsReferences.RTCVideoSources.key,
     [
       "timestamp",
       "type",
@@ -297,11 +297,11 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCAudioSources.key,
+    RTCStatsReferences.RTCAudioSources.key,
     ["timestamp", "type", "id", "trackIdentifier", "kind"]
   ],
   [
-    StasReferences.RTCRtpContributingSources.key,
+    RTCStatsReferences.RTCRtpContributingSources.key,
     [
       "timestamp",
       "type",
@@ -313,7 +313,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCPeerConnection.key,
+    RTCStatsReferences.RTCPeerConnection.key,
     [
       "timestamp",
       "type",
@@ -325,7 +325,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCDataChannels.key,
+    RTCStatsReferences.RTCDataChannels.key,
     [
       "timestamp",
       "type",
@@ -342,11 +342,11 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCMediaStreams.key,
+    RTCStatsReferences.RTCMediaStreams.key,
     ["timestamp", "type", "id", "streamIdentifier", "trackIds"]
   ],
   [
-    StasReferences.RTCVideoSenders.key,
+    RTCStatsReferences.RTCVideoSenders.key,
     [
       "timestamp",
       "type",
@@ -367,7 +367,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCAudioSenders.key,
+    RTCStatsReferences.RTCAudioSenders.key,
     [
       "timestamp",
       "type",
@@ -388,7 +388,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCVideoReceivers.key,
+    RTCStatsReferences.RTCVideoReceivers.key,
     [
       "timestamp",
       "type",
@@ -413,7 +413,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCAudioReceivers.key,
+    RTCStatsReferences.RTCAudioReceivers.key,
     [
       "timestamp",
       "type",
@@ -439,7 +439,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCTransports.key,
+    RTCStatsReferences.RTCTransports.key,
     [
       "timestamp",
       "type",
@@ -461,7 +461,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCIceCandidatePairs.key,
+    RTCStatsReferences.RTCIceCandidatePairs.key,
     [
       "timestamp",
       "type",
@@ -496,7 +496,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCLocalIceCandidates.key,
+    RTCStatsReferences.RTCLocalIceCandidates.key,
     [
       "timestamp",
       "type",
@@ -514,7 +514,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCRemoteIceCandidates.key,
+    RTCStatsReferences.RTCRemoteIceCandidates.key,
     [
       "timestamp",
       "type",
@@ -528,7 +528,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCCertificates.key,
+    RTCStatsReferences.RTCCertificates.key,
     [
       "timestamp",
       "type",
@@ -540,7 +540,7 @@ export const StatsReferenceMap = new Map([
     ]
   ],
   [
-    StasReferences.RTCStunServerConnections.key,
+    RTCStatsReferences.RTCStunServerConnections.key,
     [
       "timestamp",
       "type",

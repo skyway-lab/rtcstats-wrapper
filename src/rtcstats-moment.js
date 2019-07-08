@@ -3,15 +3,15 @@ import { ChromeRTCStatsReport } from "./standardizers/chrome.js";
 import { FirefoxRTCStatsReport } from "./standardizers/firefox.js";
 import { SafariRTCStatsReport } from "./standardizers/safari.js";
 import { BaseRTCStatsReport } from "./standardizers/base.js";
-import { StasReferences } from "./shared/constatnts.js";
+import { RTCStatsReferences } from "./shared/constatnts.js";
 
 function getVideoSenderStats(last, prev) {
   const stats = {};
 
-  if (last.has(StasReferences.RTCRemoteInboundRtpVideoStreams.key)) {
+  if (last.has(RTCStatsReferences.RTCRemoteInboundRtpVideoStreams.key)) {
     // While we only support single-track stream, this method only care about 1 transceiver.
     const RTCRemoteInboundRtpVideoStreamStats = last.get(
-      StasReferences.RTCRemoteInboundRtpVideoStreams.key
+      RTCStatsReferences.RTCRemoteInboundRtpVideoStreams.key
     )[0];
 
     stats.jitter = RTCRemoteInboundRtpVideoStreamStats.jitter;
@@ -19,16 +19,16 @@ function getVideoSenderStats(last, prev) {
   }
 
   if (
-    last.has(StasReferences.RTCOutboundRtpVideoStreams.key) &&
-    prev.has(StasReferences.RTCOutboundRtpVideoStreams.key)
+    last.has(RTCStatsReferences.RTCOutboundRtpVideoStreams.key) &&
+    prev.has(RTCStatsReferences.RTCOutboundRtpVideoStreams.key)
   ) {
     // While we only support single-track stream, this method only care about 1 transceiver.
     const RTCOutboundRtpVideoStreamStats = last.get(
-      StasReferences.RTCOutboundRtpVideoStreams.key
+      RTCStatsReferences.RTCOutboundRtpVideoStreams.key
     )[0];
     const previous = {
       RTCOutboundRtpVideoStreamStats: prev.get(
-        StasReferences.RTCOutboundRtpVideoStreams.key
+        RTCStatsReferences.RTCOutboundRtpVideoStreams.key
       )[0]
     };
 
@@ -83,32 +83,32 @@ function getVideoSenderStats(last, prev) {
 function getAudioSenderStats(last, prev) {
   const stats = {};
 
-  if (last.has(StasReferences.RTCAudioSenders.key)) {
+  if (last.has(RTCStatsReferences.RTCAudioSenders.key)) {
     // While we only support single-track stream, this method only care about 1 transceiver.
-    const RTCAudioSenderStats = last.get(StasReferences.RTCAudioSenders.key)[0];
+    const RTCAudioSenderStats = last.get(RTCStatsReferences.RTCAudioSenders.key)[0];
     stats.audioLevel = RTCAudioSenderStats.audioLevel;
   }
 
-  if (last.has(StasReferences.RTCRemoteInboundRtpAudioStreams.key)) {
+  if (last.has(RTCStatsReferences.RTCRemoteInboundRtpAudioStreams.key)) {
     // While we only support single-track stream, this method only care about 1 transceiver.
     const RTCRemoteInboundRtpAudioStreamStats = last.get(
-      StasReferences.RTCRemoteInboundRtpAudioStreams.key
+      RTCStatsReferences.RTCRemoteInboundRtpAudioStreams.key
     )[0];
     stats.jitter = RTCRemoteInboundRtpAudioStreamStats.jitter;
     stats.rtt = RTCRemoteInboundRtpAudioStreamStats.roundTripTime;
   }
 
   if (
-    last.has(StasReferences.RTCOutboundRtpAudioStreams.key) &&
-    prev.has(StasReferences.RTCOutboundRtpAudioStreams.key)
+    last.has(RTCStatsReferences.RTCOutboundRtpAudioStreams.key) &&
+    prev.has(RTCStatsReferences.RTCOutboundRtpAudioStreams.key)
   ) {
     // While we only support single-track stream, this method only care about 1 transceiver.
     const RTCOutboundRtpAudioStreamStats = last.get(
-      StasReferences.RTCOutboundRtpAudioStreams.key
+      RTCStatsReferences.RTCOutboundRtpAudioStreams.key
     )[0];
     const previous = {
       RTCOutboundRtpAudioStreamStats: prev.get(
-        StasReferences.RTCOutboundRtpAudioStreams.key
+        RTCStatsReferences.RTCOutboundRtpAudioStreams.key
       )[0]
     };
 
@@ -134,17 +134,17 @@ function getVideoReceiverStats(last, prev) {
   const stats = {};
 
   if (
-    last.has(StasReferences.RTCVideoReceivers.key) &&
-    prev.has(StasReferences.RTCVideoReceivers.key)
+    last.has(RTCStatsReferences.RTCVideoReceivers.key) &&
+    prev.has(RTCStatsReferences.RTCVideoReceivers.key)
   ) {
     // While we only support single-track stream, this method only care about 1 transceiver.
     const RTCVideoReceiverStats = last.get(
-      StasReferences.RTCVideoReceivers.key
+      RTCStatsReferences.RTCVideoReceivers.key
     )[0];
 
-    if (prev.has(StasReferences.RTCVideoReceivers.key)) {
+    if (prev.has(RTCStatsReferences.RTCVideoReceivers.key)) {
       const previous = {
-        RTCVideoReceiverStats: prev.get(StasReferences.RTCVideoReceivers.key)[0]
+        RTCVideoReceiverStats: prev.get(RTCStatsReferences.RTCVideoReceivers.key)[0]
       };
 
       if (
@@ -163,16 +163,16 @@ function getVideoReceiverStats(last, prev) {
     }
   }
 
-  if (last.has(StasReferences.RTCInboundRtpVideoStreams.key)) {
+  if (last.has(RTCStatsReferences.RTCInboundRtpVideoStreams.key)) {
     // While we only support single-track stream, this method only care about 1 transceiver.
     const RTCInboundRtpVideoStreamStats = last.get(
-      StasReferences.RTCInboundRtpVideoStreams.key
+      RTCStatsReferences.RTCInboundRtpVideoStreams.key
     )[0];
 
-    if (prev.has(StasReferences.RTCInboundRtpVideoStreams.key)) {
+    if (prev.has(RTCStatsReferences.RTCInboundRtpVideoStreams.key)) {
       const previous = {
         RTCInboundRtpVideoStreamStats: prev.get(
-          StasReferences.RTCInboundRtpVideoStreams.key
+          RTCStatsReferences.RTCInboundRtpVideoStreams.key
         )[0]
       };
 
@@ -228,23 +228,23 @@ function getVideoReceiverStats(last, prev) {
 function getAudioReceiverStats(last, prev) {
   const stats = {};
 
-  if (last.has(StasReferences.RTCAudioReceivers.key)) {
+  if (last.has(RTCStatsReferences.RTCAudioReceivers.key)) {
     // While we only support single-track stream, this method only care about 1 transceiver.
     const RTCAudioReceiverStats = last.get(
-      StasReferences.RTCAudioReceivers.key
+      RTCStatsReferences.RTCAudioReceivers.key
     )[0];
     stats.audioLevel = RTCAudioReceiverStats.audioLevel;
 
-    if (prev.has(StasReferences.RTCAudioReceivers.key)) {
+    if (prev.has(RTCStatsReferences.RTCAudioReceivers.key)) {
       // While we only support single-track stream, this method only care about 1 transceiver.
       const RTCAudioReceiverStats = last.get(
-        StasReferences.RTCAudioReceivers.key
+        RTCStatsReferences.RTCAudioReceivers.key
       )[0];
 
-      if (prev.has(StasReferences.RTCAudioReceivers.key)) {
+      if (prev.has(RTCStatsReferences.RTCAudioReceivers.key)) {
         const previous = {
           RTCAudioReceiverStats: prev.get(
-            StasReferences.RTCAudioReceivers.key
+            RTCStatsReferences.RTCAudioReceivers.key
           )[0]
         };
 
@@ -265,15 +265,15 @@ function getAudioReceiverStats(last, prev) {
     }
   }
 
-  if (last.has(StasReferences.RTCInboundRtpAudioStreams.key)) {
+  if (last.has(RTCStatsReferences.RTCInboundRtpAudioStreams.key)) {
     // While we only support single-track stream, this method only care about 1 transceiver.
     const RTCInboundRtpAudioStreamStats = last.get(
-      StasReferences.RTCInboundRtpAudioStreams.key
+      RTCStatsReferences.RTCInboundRtpAudioStreams.key
     )[0];
-    if (prev.has(StasReferences.RTCInboundRtpAudioStreams.key)) {
+    if (prev.has(RTCStatsReferences.RTCInboundRtpAudioStreams.key)) {
       const previous = {
         RTCInboundRtpAudioStreamStats: prev.get(
-          StasReferences.RTCInboundRtpAudioStreams.key
+          RTCStatsReferences.RTCInboundRtpAudioStreams.key
         )[0]
       };
 
@@ -315,13 +315,13 @@ function getCandidatePairStats(last, prev) {
   const stats = {};
 
   if (
-    last.has(StasReferences.RTCIceCandidatePairs.key) &&
+    last.has(RTCStatsReferences.RTCIceCandidatePairs.key) &&
     last
-      .get(StasReferences.RTCIceCandidatePairs.key)
+      .get(RTCStatsReferences.RTCIceCandidatePairs.key)
       .some(stat => stat.nominated)
   ) {
     const RTCIceCandidatePairStats = last
-      .get(StasReferences.RTCIceCandidatePairs.key)
+      .get(RTCStatsReferences.RTCIceCandidatePairs.key)
       .find(stat => stat.nominated);
 
     // assign rtt directly
@@ -329,14 +329,14 @@ function getCandidatePairStats(last, prev) {
 
     // check if previous stats also has nominated candidate-pair
     if (
-      prev.has(StasReferences.RTCIceCandidatePairs.key) &&
+      prev.has(RTCStatsReferences.RTCIceCandidatePairs.key) &&
       prev
-        .get(StasReferences.RTCIceCandidatePairs.key)
+        .get(RTCStatsReferences.RTCIceCandidatePairs.key)
         .some(stat => stat.nominated)
     ) {
       const previous = {
         RTCIceCandidatePairStats: prev
-          .get(StasReferences.RTCIceCandidatePairs.key)
+          .get(RTCStatsReferences.RTCIceCandidatePairs.key)
           .find(stat => stat.nominated)
       };
 

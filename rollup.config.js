@@ -7,7 +7,7 @@ export default {
   output: {
     file: "./dist/rtcstats-wrapper.js",
     format: "umd",
-    name: "RTCStatsMoment"
+    name: "RTCStatsWrapper"
   },
   plugins: [
     resolve({ preferBuiltins: true, mainFields: ["browser"] }),

@@ -1,35 +1,35 @@
 import { BaseRTCStatsReport } from "./base.js";
-import { StasReferences } from "../shared/constatnts.js";
+import { RTCStatsReferences } from "../shared/constatnts.js";
 
 export class SafariRTCStatsReport extends BaseRTCStatsReport {
-  _getStatsReference(stats) {
+  _getRTCStatsReference(stats) {
     switch (stats.type) {
       case "track":
         if (stats.remoteSource && stats.hasOwnProperty("frameHeight")) {
-          return StasReferences.RTCVideoReceivers.key;
+          return RTCStatsReferences.RTCVideoReceivers.key;
         } else if (stats.remoteSource && stats.hasOwnProperty("audioLevel")) {
-          return StasReferences.RTCAudioReceivers.key;
+          return RTCStatsReferences.RTCAudioReceivers.key;
         } else if (stats.hasOwnProperty("frameHeight")) {
-          return StasReferences.RTCVideoSenders.key;
+          return RTCStatsReferences.RTCVideoSenders.key;
         } else if (stats.hasOwnProperty("audioLevel")) {
-          return StasReferences.RTCAudioSenders.key;
+          return RTCStatsReferences.RTCAudioSenders.key;
         }
         break;
       case "inbound-rtp":
         if (stats.mediaType === "video") {
-          return StasReferences.RTCInboundRtpVideoStreams.key;
+          return RTCStatsReferences.RTCInboundRtpVideoStreams.key;
         } else if (stats.mediaType === "audio") {
-          return StasReferences.RTCInboundRtpAudioStreams.key;
+          return RTCStatsReferences.RTCInboundRtpAudioStreams.key;
         }
         break;
       case "outbound-rtp":
         if (stats.mediaType === "video") {
-          return StasReferences.RTCOutboundRtpVideoStreams.key;
+          return RTCStatsReferences.RTCOutboundRtpVideoStreams.key;
         } else if (stats.mediaType === "audio") {
-          return StasReferences.RTCOutboundRtpAudioStreams.key;
+          return RTCStatsReferences.RTCOutboundRtpAudioStreams.key;
         }
         break;
     }
-    return super._getStatsReference(stats);
+    return super._getRTCStatsReference(stats);
   }
 }

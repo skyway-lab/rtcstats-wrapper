@@ -1,20 +1,20 @@
 import { BaseRTCStatsReport } from "./base.js";
-import { StasReferences } from "../shared/constatnts.js";
+import { RTCStatsReferences } from "../shared/constatnts.js";
 
 export class ChromeRTCStatsReport extends BaseRTCStatsReport {
-  _getStatsReference(stats) {
+  _getRTCStatsReference(stats) {
     switch (stats.type) {
       case "track":
         if (stats.remoteSource && stats.kind === "video") {
-          return StasReferences.RTCVideoReceivers.key;
+          return RTCStatsReferences.RTCVideoReceivers.key;
         } else if (stats.remoteSource && stats.kind === "audio") {
-          return StasReferences.RTCAudioReceivers.key;
+          return RTCStatsReferences.RTCAudioReceivers.key;
         } else if (stats.kind === "video") {
-          return StasReferences.RTCVideoSenders.key;
+          return RTCStatsReferences.RTCVideoSenders.key;
         } else if (stats.kind === "audio") {
-          return StasReferences.RTCAudioSenders.key;
+          return RTCStatsReferences.RTCAudioSenders.key;
         }
     }
-    return super._getStatsReference(stats);
+    return super._getRTCStatsReference(stats);
   }
 }

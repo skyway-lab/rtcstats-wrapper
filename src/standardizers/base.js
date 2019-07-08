@@ -1,15 +1,15 @@
-import { StasReferences, StatsReferenceMap } from "../shared/constatnts.js";
+import { RTCStatsReferences, RTCStatsReferenceMap } from "../shared/constatnts.js";
 
 export class BaseRTCStatsReport {
   constructor(originalReport) {
     const report = new Map();
 
     for (const originalStats of originalReport.values()) {
-      const ref = this._getStatsReference(originalStats);
+      const ref = this._getRTCStatsReference(originalStats);
       const stats = {};
 
       // get the preferred value from original stats.
-      for (const attr of StatsReferenceMap.get(ref)) {
+      for (const attr of RTCStatsReferenceMap.get(ref)) {
         if (originalStats[attr] !== undefined) {
           stats[attr] = originalStats[attr];
         }
@@ -36,79 +36,79 @@ export class BaseRTCStatsReport {
     return this._report.get(key);
   }
 
-  _getStatsReference(stats) {
+  _getRTCStatsReference(stats) {
     switch (stats.type) {
       case "codec":
-        return StasReferences.RTCCodecs.key;
+        return RTCStatsReferences.RTCCodecs.key;
       case "inbound-rtp":
         if (stats.kind === "video") {
-          return StasReferences.RTCInboundRtpVideoStreams.key;
+          return RTCStatsReferences.RTCInboundRtpVideoStreams.key;
         } else if (stats.kind === "audio") {
-          return StasReferences.RTCInboundRtpAudioStreams.key;
+          return RTCStatsReferences.RTCInboundRtpAudioStreams.key;
         }
         break;
       case "outbound-rtp":
         if (stats.kind === "video") {
-          return StasReferences.RTCOutboundRtpVideoStreams.key;
+          return RTCStatsReferences.RTCOutboundRtpVideoStreams.key;
         } else if (stats.kind === "audio") {
-          return StasReferences.RTCOutboundRtpAudioStreams.key;
+          return RTCStatsReferences.RTCOutboundRtpAudioStreams.key;
         }
         break;
       case "remote-inbound-rtp":
         if (stats.kind === "video") {
-          return StasReferences.RTCRemoteInboundRtpVideoStreams.key;
+          return RTCStatsReferences.RTCRemoteInboundRtpVideoStreams.key;
         } else if (stats.kind === "audio") {
-          return StasReferences.RTCRemoteInboundRtpAudioStreams.key;
+          return RTCStatsReferences.RTCRemoteInboundRtpAudioStreams.key;
         }
         break;
       case "remote-outbound-rtp":
         if (stats.kind === "video") {
-          return StasReferences.RTCRemoteOutboundRtpVideoStreams.key;
+          return RTCStatsReferences.RTCRemoteOutboundRtpVideoStreams.key;
         } else if (stats.kind === "audio") {
-          return StasReferences.RTCRemoteOutboundRtpAudioStreams.key;
+          return RTCStatsReferences.RTCRemoteOutboundRtpAudioStreams.key;
         }
         break;
       case "media-source":
         if (stats.kind === "video") {
-          return StasReferences.RTCVideoSources.key;
+          return RTCStatsReferences.RTCVideoSources.key;
         } else if (stats.kind === "audio") {
-          return StasReferences.RTCAudioSources.key;
+          return RTCStatsReferences.RTCAudioSources.key;
         }
         break;
       case "csrc":
-        return StasReferences.RTCRtpContributingSources.key;
+        return RTCStatsReferences.RTCRtpContributingSources.key;
       case "peer-connection":
-        return StasReferences.RTCPeerConnection.key;
+        return RTCStatsReferences.RTCPeerConnection.key;
       case "data-channel":
-        return StasReferences.RTCDataChannels.key;
+        return RTCStatsReferences.RTCDataChannels.key;
       case "stream":
-        return StasReferences.RTCMediaStreams.key;
+        return RTCStatsReferences.RTCMediaStreams.key;
       case "sender":
         if (stats.kind === "video") {
-          return StasReferences.RTCVideoSenders.key;
+          return RTCStatsReferences.RTCVideoSenders.key;
         } else if (stats.kind === "audio") {
-          return StasReferences.RTCAudioSenders.key;
+          return RTCStatsReferences.RTCAudioSenders.key;
         }
         break;
       case "receiver":
         if (stats.kind === "video") {
-          return StasReferences.RTCVideoReceivers.key;
+          return RTCStatsReferences.RTCVideoReceivers.key;
         } else if (stats.kind === "audio") {
-          return StasReferences.RTCAudioReceivers.key;
+          return RTCStatsReferences.RTCAudioReceivers.key;
         }
         break;
       case "transport":
-        return StasReferences.RTCTransports.key;
+        return RTCStatsReferences.RTCTransports.key;
       case "candidate-pair":
-        return StasReferences.RTCIceCandidatePairs.key;
+        return RTCStatsReferences.RTCIceCandidatePairs.key;
       case "local-candidate":
-        return StasReferences.RTCLocalIceCandidates.key;
+        return RTCStatsReferences.RTCLocalIceCandidates.key;
       case "remote-candidate":
-        return StasReferences.RTCRemoteIceCandidates.key;
+        return RTCStatsReferences.RTCRemoteIceCandidates.key;
       case "certificate":
-        return StasReferences.RTCCertificates.key;
+        return RTCStatsReferences.RTCCertificates.key;
       case "stunserverconnection":
-        return StasReferences.RTCStunServerConnections.key;
+        return RTCStatsReferences.RTCStunServerConnections.key;
       default:
         throw new Error(
           `Received an unknown stats-type string: ${stats.type}.`
