@@ -1,20 +1,23 @@
 import { BaseRTCStatsReport } from "./base.js";
-import { StasReferences, StatsReferenceMap } from "../shared/constatnts.js";
+import {
+  RTCStatsReferences,
+  RTCStatsReferenceMap
+} from "../shared/constatnts.js";
 
 function getTrackStatsOfFirefox(stats) {
   switch (stats.type) {
     case "inbound-rtp":
       if (stats.kind === "video") {
-        return StasReferences.RTCVideoReceivers.key;
+        return RTCStatsReferences.RTCVideoReceivers.key;
       } else if (stats.kind === "audio") {
-        return StasReferences.RTCAudioReceivers.key;
+        return RTCStatsReferences.RTCAudioReceivers.key;
       }
       break;
     case "outbound-rtp":
       if (stats.kind === "video") {
-        return StasReferences.RTCVideoSenders.key;
+        return RTCStatsReferences.RTCVideoSenders.key;
       } else if (stats.kind === "audio") {
-        return StasReferences.RTCAudioSenders.key;
+        return RTCStatsReferences.RTCAudioSenders.key;
       }
       break;
     default:
@@ -36,7 +39,7 @@ export class FirefoxRTCStatsReport extends BaseRTCStatsReport {
       const stats = {};
 
       // get the preferred value from original stats.
-      for (const attr of StatsReferenceMap.get(ref)) {
+      for (const attr of RTCStatsReferenceMap.get(ref)) {
         if (originalStats[attr] !== undefined) {
           stats[attr] = originalStats[attr];
         }

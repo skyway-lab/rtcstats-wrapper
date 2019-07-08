@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(global = global || self, factory(global.RTCStatsMoment = {}));
+	(global = global || self, factory(global.RTCStatsWrapper = {}));
 }(this, function (exports) { 'use strict';
 
 	var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -665,7 +665,7 @@
 
 	var _enum$1 = _enum;
 
-	const StasReferences = new _enum$1([
+	const RTCStatsReferences = new _enum$1([
 	  "RTCCodecs",
 	  "RTCInboundRtpVideoStreams",
 	  "RTCInboundRtpAudioStreams",
@@ -693,9 +693,9 @@
 	  "RTCStunServerConnections"
 	]);
 
-	const StatsReferenceMap = new Map([
+	const RTCStatsReferenceMap = new Map([
 	  [
-	    StasReferences.RTCCodecs.key,
+	    RTCStatsReferences.RTCCodecs.key,
 	    [
 	      "type",
 	      "id",
@@ -710,7 +710,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCInboundRtpVideoStreams.key,
+	    RTCStatsReferences.RTCInboundRtpVideoStreams.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -751,7 +751,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCInboundRtpAudioStreams.key,
+	    RTCStatsReferences.RTCInboundRtpAudioStreams.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -786,7 +786,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCOutboundRtpVideoStreams.key,
+	    RTCStatsReferences.RTCOutboundRtpVideoStreams.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -824,7 +824,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCOutboundRtpAudioStreams.key,
+	    RTCStatsReferences.RTCOutboundRtpAudioStreams.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -854,7 +854,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCRemoteInboundRtpVideoStreams.key,
+	    RTCStatsReferences.RTCRemoteInboundRtpVideoStreams.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -882,7 +882,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCRemoteInboundRtpAudioStreams.key,
+	    RTCStatsReferences.RTCRemoteInboundRtpAudioStreams.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -910,7 +910,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCRemoteOutboundRtpVideoStreams.key,
+	    RTCStatsReferences.RTCRemoteOutboundRtpVideoStreams.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -929,7 +929,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCRemoteOutboundRtpAudioStreams.key,
+	    RTCStatsReferences.RTCRemoteOutboundRtpAudioStreams.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -948,7 +948,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCVideoSources.key,
+	    RTCStatsReferences.RTCVideoSources.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -962,11 +962,11 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCAudioSources.key,
+	    RTCStatsReferences.RTCAudioSources.key,
 	    ["timestamp", "type", "id", "trackIdentifier", "kind"]
 	  ],
 	  [
-	    StasReferences.RTCRtpContributingSources.key,
+	    RTCStatsReferences.RTCRtpContributingSources.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -978,7 +978,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCPeerConnection.key,
+	    RTCStatsReferences.RTCPeerConnection.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -990,7 +990,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCDataChannels.key,
+	    RTCStatsReferences.RTCDataChannels.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -1007,11 +1007,11 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCMediaStreams.key,
+	    RTCStatsReferences.RTCMediaStreams.key,
 	    ["timestamp", "type", "id", "streamIdentifier", "trackIds"]
 	  ],
 	  [
-	    StasReferences.RTCVideoSenders.key,
+	    RTCStatsReferences.RTCVideoSenders.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -1032,7 +1032,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCAudioSenders.key,
+	    RTCStatsReferences.RTCAudioSenders.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -1053,7 +1053,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCVideoReceivers.key,
+	    RTCStatsReferences.RTCVideoReceivers.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -1078,7 +1078,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCAudioReceivers.key,
+	    RTCStatsReferences.RTCAudioReceivers.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -1104,7 +1104,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCTransports.key,
+	    RTCStatsReferences.RTCTransports.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -1126,7 +1126,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCIceCandidatePairs.key,
+	    RTCStatsReferences.RTCIceCandidatePairs.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -1161,7 +1161,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCLocalIceCandidates.key,
+	    RTCStatsReferences.RTCLocalIceCandidates.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -1179,7 +1179,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCRemoteIceCandidates.key,
+	    RTCStatsReferences.RTCRemoteIceCandidates.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -1193,7 +1193,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCCertificates.key,
+	    RTCStatsReferences.RTCCertificates.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -1205,7 +1205,7 @@
 	    ]
 	  ],
 	  [
-	    StasReferences.RTCStunServerConnections.key,
+	    RTCStatsReferences.RTCStunServerConnections.key,
 	    [
 	      "timestamp",
 	      "type",
@@ -1226,11 +1226,11 @@
 	    const report = new Map();
 
 	    for (const originalStats of originalReport.values()) {
-	      const ref = this._getStatsReference(originalStats);
+	      const ref = this._getRTCStatsReference(originalStats);
 	      const stats = {};
 
 	      // get the preferred value from original stats.
-	      for (const attr of StatsReferenceMap.get(ref)) {
+	      for (const attr of RTCStatsReferenceMap.get(ref)) {
 	        if (originalStats[attr] !== undefined) {
 	          stats[attr] = originalStats[attr];
 	        }
@@ -1257,79 +1257,79 @@
 	    return this._report.get(key);
 	  }
 
-	  _getStatsReference(stats) {
+	  _getRTCStatsReference(stats) {
 	    switch (stats.type) {
 	      case "codec":
-	        return StasReferences.RTCCodecs.key;
+	        return RTCStatsReferences.RTCCodecs.key;
 	      case "inbound-rtp":
 	        if (stats.kind === "video") {
-	          return StasReferences.RTCInboundRtpVideoStreams.key;
+	          return RTCStatsReferences.RTCInboundRtpVideoStreams.key;
 	        } else if (stats.kind === "audio") {
-	          return StasReferences.RTCInboundRtpAudioStreams.key;
+	          return RTCStatsReferences.RTCInboundRtpAudioStreams.key;
 	        }
 	        break;
 	      case "outbound-rtp":
 	        if (stats.kind === "video") {
-	          return StasReferences.RTCOutboundRtpVideoStreams.key;
+	          return RTCStatsReferences.RTCOutboundRtpVideoStreams.key;
 	        } else if (stats.kind === "audio") {
-	          return StasReferences.RTCOutboundRtpAudioStreams.key;
+	          return RTCStatsReferences.RTCOutboundRtpAudioStreams.key;
 	        }
 	        break;
 	      case "remote-inbound-rtp":
 	        if (stats.kind === "video") {
-	          return StasReferences.RTCRemoteInboundRtpVideoStreams.key;
+	          return RTCStatsReferences.RTCRemoteInboundRtpVideoStreams.key;
 	        } else if (stats.kind === "audio") {
-	          return StasReferences.RTCRemoteInboundRtpAudioStreams.key;
+	          return RTCStatsReferences.RTCRemoteInboundRtpAudioStreams.key;
 	        }
 	        break;
 	      case "remote-outbound-rtp":
 	        if (stats.kind === "video") {
-	          return StasReferences.RTCRemoteOutboundRtpVideoStreams.key;
+	          return RTCStatsReferences.RTCRemoteOutboundRtpVideoStreams.key;
 	        } else if (stats.kind === "audio") {
-	          return StasReferences.RTCRemoteOutboundRtpAudioStreams.key;
+	          return RTCStatsReferences.RTCRemoteOutboundRtpAudioStreams.key;
 	        }
 	        break;
 	      case "media-source":
 	        if (stats.kind === "video") {
-	          return StasReferences.RTCVideoSources.key;
+	          return RTCStatsReferences.RTCVideoSources.key;
 	        } else if (stats.kind === "audio") {
-	          return StasReferences.RTCAudioSources.key;
+	          return RTCStatsReferences.RTCAudioSources.key;
 	        }
 	        break;
 	      case "csrc":
-	        return StasReferences.RTCRtpContributingSources.key;
+	        return RTCStatsReferences.RTCRtpContributingSources.key;
 	      case "peer-connection":
-	        return StasReferences.RTCPeerConnection.key;
+	        return RTCStatsReferences.RTCPeerConnection.key;
 	      case "data-channel":
-	        return StasReferences.RTCDataChannels.key;
+	        return RTCStatsReferences.RTCDataChannels.key;
 	      case "stream":
-	        return StasReferences.RTCMediaStreams.key;
+	        return RTCStatsReferences.RTCMediaStreams.key;
 	      case "sender":
 	        if (stats.kind === "video") {
-	          return StasReferences.RTCVideoSenders.key;
+	          return RTCStatsReferences.RTCVideoSenders.key;
 	        } else if (stats.kind === "audio") {
-	          return StasReferences.RTCAudioSenders.key;
+	          return RTCStatsReferences.RTCAudioSenders.key;
 	        }
 	        break;
 	      case "receiver":
 	        if (stats.kind === "video") {
-	          return StasReferences.RTCVideoReceivers.key;
+	          return RTCStatsReferences.RTCVideoReceivers.key;
 	        } else if (stats.kind === "audio") {
-	          return StasReferences.RTCAudioReceivers.key;
+	          return RTCStatsReferences.RTCAudioReceivers.key;
 	        }
 	        break;
 	      case "transport":
-	        return StasReferences.RTCTransports.key;
+	        return RTCStatsReferences.RTCTransports.key;
 	      case "candidate-pair":
-	        return StasReferences.RTCIceCandidatePairs.key;
+	        return RTCStatsReferences.RTCIceCandidatePairs.key;
 	      case "local-candidate":
-	        return StasReferences.RTCLocalIceCandidates.key;
+	        return RTCStatsReferences.RTCLocalIceCandidates.key;
 	      case "remote-candidate":
-	        return StasReferences.RTCRemoteIceCandidates.key;
+	        return RTCStatsReferences.RTCRemoteIceCandidates.key;
 	      case "certificate":
-	        return StasReferences.RTCCertificates.key;
+	        return RTCStatsReferences.RTCCertificates.key;
 	      case "stunserverconnection":
-	        return StasReferences.RTCStunServerConnections.key;
+	        return RTCStatsReferences.RTCStunServerConnections.key;
 	      default:
 	        throw new Error(
 	          `Received an unknown stats-type string: ${stats.type}.`
@@ -1342,20 +1342,20 @@
 	}
 
 	class ChromeRTCStatsReport extends BaseRTCStatsReport {
-	  _getStatsReference(stats) {
+	  _getRTCStatsReference(stats) {
 	    switch (stats.type) {
 	      case "track":
 	        if (stats.remoteSource && stats.kind === "video") {
-	          return StasReferences.RTCVideoReceivers.key;
+	          return RTCStatsReferences.RTCVideoReceivers.key;
 	        } else if (stats.remoteSource && stats.kind === "audio") {
-	          return StasReferences.RTCAudioReceivers.key;
+	          return RTCStatsReferences.RTCAudioReceivers.key;
 	        } else if (stats.kind === "video") {
-	          return StasReferences.RTCVideoSenders.key;
+	          return RTCStatsReferences.RTCVideoSenders.key;
 	        } else if (stats.kind === "audio") {
-	          return StasReferences.RTCAudioSenders.key;
+	          return RTCStatsReferences.RTCAudioSenders.key;
 	        }
 	    }
-	    return super._getStatsReference(stats);
+	    return super._getRTCStatsReference(stats);
 	  }
 	}
 
@@ -1363,16 +1363,16 @@
 	  switch (stats.type) {
 	    case "inbound-rtp":
 	      if (stats.kind === "video") {
-	        return StasReferences.RTCVideoReceivers.key;
+	        return RTCStatsReferences.RTCVideoReceivers.key;
 	      } else if (stats.kind === "audio") {
-	        return StasReferences.RTCAudioReceivers.key;
+	        return RTCStatsReferences.RTCAudioReceivers.key;
 	      }
 	      break;
 	    case "outbound-rtp":
 	      if (stats.kind === "video") {
-	        return StasReferences.RTCVideoSenders.key;
+	        return RTCStatsReferences.RTCVideoSenders.key;
 	      } else if (stats.kind === "audio") {
-	        return StasReferences.RTCAudioSenders.key;
+	        return RTCStatsReferences.RTCAudioSenders.key;
 	      }
 	      break;
 	    default:
@@ -1394,7 +1394,7 @@
 	      const stats = {};
 
 	      // get the preferred value from original stats.
-	      for (const attr of StatsReferenceMap.get(ref)) {
+	      for (const attr of RTCStatsReferenceMap.get(ref)) {
 	        if (originalStats[attr] !== undefined) {
 	          stats[attr] = originalStats[attr];
 	        }
@@ -1413,35 +1413,35 @@
 	}
 
 	class SafariRTCStatsReport extends BaseRTCStatsReport {
-	  _getStatsReference(stats) {
+	  _getRTCStatsReference(stats) {
 	    switch (stats.type) {
 	      case "track":
 	        if (stats.remoteSource && stats.hasOwnProperty("frameHeight")) {
-	          return StasReferences.RTCVideoReceivers.key;
+	          return RTCStatsReferences.RTCVideoReceivers.key;
 	        } else if (stats.remoteSource && stats.hasOwnProperty("audioLevel")) {
-	          return StasReferences.RTCAudioReceivers.key;
+	          return RTCStatsReferences.RTCAudioReceivers.key;
 	        } else if (stats.hasOwnProperty("frameHeight")) {
-	          return StasReferences.RTCVideoSenders.key;
+	          return RTCStatsReferences.RTCVideoSenders.key;
 	        } else if (stats.hasOwnProperty("audioLevel")) {
-	          return StasReferences.RTCAudioSenders.key;
+	          return RTCStatsReferences.RTCAudioSenders.key;
 	        }
 	        break;
 	      case "inbound-rtp":
 	        if (stats.mediaType === "video") {
-	          return StasReferences.RTCInboundRtpVideoStreams.key;
+	          return RTCStatsReferences.RTCInboundRtpVideoStreams.key;
 	        } else if (stats.mediaType === "audio") {
-	          return StasReferences.RTCInboundRtpAudioStreams.key;
+	          return RTCStatsReferences.RTCInboundRtpAudioStreams.key;
 	        }
 	        break;
 	      case "outbound-rtp":
 	        if (stats.mediaType === "video") {
-	          return StasReferences.RTCOutboundRtpVideoStreams.key;
+	          return RTCStatsReferences.RTCOutboundRtpVideoStreams.key;
 	        } else if (stats.mediaType === "audio") {
-	          return StasReferences.RTCOutboundRtpAudioStreams.key;
+	          return RTCStatsReferences.RTCOutboundRtpAudioStreams.key;
 	        }
 	        break;
 	    }
-	    return super._getStatsReference(stats);
+	    return super._getRTCStatsReference(stats);
 	  }
 	}
 
@@ -1617,10 +1617,10 @@
 	function getVideoSenderStats(last, prev) {
 	  const stats = {};
 
-	  if (last.has(StasReferences.RTCRemoteInboundRtpVideoStreams.key)) {
+	  if (last.has(RTCStatsReferences.RTCRemoteInboundRtpVideoStreams.key)) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
 	    const RTCRemoteInboundRtpVideoStreamStats = last.get(
-	      StasReferences.RTCRemoteInboundRtpVideoStreams.key
+	      RTCStatsReferences.RTCRemoteInboundRtpVideoStreams.key
 	    )[0];
 
 	    stats.jitter = RTCRemoteInboundRtpVideoStreamStats.jitter;
@@ -1628,16 +1628,16 @@
 	  }
 
 	  if (
-	    last.has(StasReferences.RTCOutboundRtpVideoStreams.key) &&
-	    prev.has(StasReferences.RTCOutboundRtpVideoStreams.key)
+	    last.has(RTCStatsReferences.RTCOutboundRtpVideoStreams.key) &&
+	    prev.has(RTCStatsReferences.RTCOutboundRtpVideoStreams.key)
 	  ) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
 	    const RTCOutboundRtpVideoStreamStats = last.get(
-	      StasReferences.RTCOutboundRtpVideoStreams.key
+	      RTCStatsReferences.RTCOutboundRtpVideoStreams.key
 	    )[0];
 	    const previous = {
 	      RTCOutboundRtpVideoStreamStats: prev.get(
-	        StasReferences.RTCOutboundRtpVideoStreams.key
+	        RTCStatsReferences.RTCOutboundRtpVideoStreams.key
 	      )[0]
 	    };
 
@@ -1692,32 +1692,32 @@
 	function getAudioSenderStats(last, prev) {
 	  const stats = {};
 
-	  if (last.has(StasReferences.RTCAudioSenders.key)) {
+	  if (last.has(RTCStatsReferences.RTCAudioSenders.key)) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
-	    const RTCAudioSenderStats = last.get(StasReferences.RTCAudioSenders.key)[0];
+	    const RTCAudioSenderStats = last.get(RTCStatsReferences.RTCAudioSenders.key)[0];
 	    stats.audioLevel = RTCAudioSenderStats.audioLevel;
 	  }
 
-	  if (last.has(StasReferences.RTCRemoteInboundRtpAudioStreams.key)) {
+	  if (last.has(RTCStatsReferences.RTCRemoteInboundRtpAudioStreams.key)) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
 	    const RTCRemoteInboundRtpAudioStreamStats = last.get(
-	      StasReferences.RTCRemoteInboundRtpAudioStreams.key
+	      RTCStatsReferences.RTCRemoteInboundRtpAudioStreams.key
 	    )[0];
 	    stats.jitter = RTCRemoteInboundRtpAudioStreamStats.jitter;
 	    stats.rtt = RTCRemoteInboundRtpAudioStreamStats.roundTripTime;
 	  }
 
 	  if (
-	    last.has(StasReferences.RTCOutboundRtpAudioStreams.key) &&
-	    prev.has(StasReferences.RTCOutboundRtpAudioStreams.key)
+	    last.has(RTCStatsReferences.RTCOutboundRtpAudioStreams.key) &&
+	    prev.has(RTCStatsReferences.RTCOutboundRtpAudioStreams.key)
 	  ) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
 	    const RTCOutboundRtpAudioStreamStats = last.get(
-	      StasReferences.RTCOutboundRtpAudioStreams.key
+	      RTCStatsReferences.RTCOutboundRtpAudioStreams.key
 	    )[0];
 	    const previous = {
 	      RTCOutboundRtpAudioStreamStats: prev.get(
-	        StasReferences.RTCOutboundRtpAudioStreams.key
+	        RTCStatsReferences.RTCOutboundRtpAudioStreams.key
 	      )[0]
 	    };
 
@@ -1743,17 +1743,17 @@
 	  const stats = {};
 
 	  if (
-	    last.has(StasReferences.RTCVideoReceivers.key) &&
-	    prev.has(StasReferences.RTCVideoReceivers.key)
+	    last.has(RTCStatsReferences.RTCVideoReceivers.key) &&
+	    prev.has(RTCStatsReferences.RTCVideoReceivers.key)
 	  ) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
 	    const RTCVideoReceiverStats = last.get(
-	      StasReferences.RTCVideoReceivers.key
+	      RTCStatsReferences.RTCVideoReceivers.key
 	    )[0];
 
-	    if (prev.has(StasReferences.RTCVideoReceivers.key)) {
+	    if (prev.has(RTCStatsReferences.RTCVideoReceivers.key)) {
 	      const previous = {
-	        RTCVideoReceiverStats: prev.get(StasReferences.RTCVideoReceivers.key)[0]
+	        RTCVideoReceiverStats: prev.get(RTCStatsReferences.RTCVideoReceivers.key)[0]
 	      };
 
 	      if (
@@ -1772,16 +1772,16 @@
 	    }
 	  }
 
-	  if (last.has(StasReferences.RTCInboundRtpVideoStreams.key)) {
+	  if (last.has(RTCStatsReferences.RTCInboundRtpVideoStreams.key)) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
 	    const RTCInboundRtpVideoStreamStats = last.get(
-	      StasReferences.RTCInboundRtpVideoStreams.key
+	      RTCStatsReferences.RTCInboundRtpVideoStreams.key
 	    )[0];
 
-	    if (prev.has(StasReferences.RTCInboundRtpVideoStreams.key)) {
+	    if (prev.has(RTCStatsReferences.RTCInboundRtpVideoStreams.key)) {
 	      const previous = {
 	        RTCInboundRtpVideoStreamStats: prev.get(
-	          StasReferences.RTCInboundRtpVideoStreams.key
+	          RTCStatsReferences.RTCInboundRtpVideoStreams.key
 	        )[0]
 	      };
 
@@ -1837,23 +1837,23 @@
 	function getAudioReceiverStats(last, prev) {
 	  const stats = {};
 
-	  if (last.has(StasReferences.RTCAudioReceivers.key)) {
+	  if (last.has(RTCStatsReferences.RTCAudioReceivers.key)) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
 	    const RTCAudioReceiverStats = last.get(
-	      StasReferences.RTCAudioReceivers.key
+	      RTCStatsReferences.RTCAudioReceivers.key
 	    )[0];
 	    stats.audioLevel = RTCAudioReceiverStats.audioLevel;
 
-	    if (prev.has(StasReferences.RTCAudioReceivers.key)) {
+	    if (prev.has(RTCStatsReferences.RTCAudioReceivers.key)) {
 	      // While we only support single-track stream, this method only care about 1 transceiver.
 	      const RTCAudioReceiverStats = last.get(
-	        StasReferences.RTCAudioReceivers.key
+	        RTCStatsReferences.RTCAudioReceivers.key
 	      )[0];
 
-	      if (prev.has(StasReferences.RTCAudioReceivers.key)) {
+	      if (prev.has(RTCStatsReferences.RTCAudioReceivers.key)) {
 	        const previous = {
 	          RTCAudioReceiverStats: prev.get(
-	            StasReferences.RTCAudioReceivers.key
+	            RTCStatsReferences.RTCAudioReceivers.key
 	          )[0]
 	        };
 
@@ -1874,15 +1874,15 @@
 	    }
 	  }
 
-	  if (last.has(StasReferences.RTCInboundRtpAudioStreams.key)) {
+	  if (last.has(RTCStatsReferences.RTCInboundRtpAudioStreams.key)) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
 	    const RTCInboundRtpAudioStreamStats = last.get(
-	      StasReferences.RTCInboundRtpAudioStreams.key
+	      RTCStatsReferences.RTCInboundRtpAudioStreams.key
 	    )[0];
-	    if (prev.has(StasReferences.RTCInboundRtpAudioStreams.key)) {
+	    if (prev.has(RTCStatsReferences.RTCInboundRtpAudioStreams.key)) {
 	      const previous = {
 	        RTCInboundRtpAudioStreamStats: prev.get(
-	          StasReferences.RTCInboundRtpAudioStreams.key
+	          RTCStatsReferences.RTCInboundRtpAudioStreams.key
 	        )[0]
 	      };
 
@@ -1924,13 +1924,13 @@
 	  const stats = {};
 
 	  if (
-	    last.has(StasReferences.RTCIceCandidatePairs.key) &&
+	    last.has(RTCStatsReferences.RTCIceCandidatePairs.key) &&
 	    last
-	      .get(StasReferences.RTCIceCandidatePairs.key)
+	      .get(RTCStatsReferences.RTCIceCandidatePairs.key)
 	      .some(stat => stat.nominated)
 	  ) {
 	    const RTCIceCandidatePairStats = last
-	      .get(StasReferences.RTCIceCandidatePairs.key)
+	      .get(RTCStatsReferences.RTCIceCandidatePairs.key)
 	      .find(stat => stat.nominated);
 
 	    // assign rtt directly
@@ -1938,14 +1938,14 @@
 
 	    // check if previous stats also has nominated candidate-pair
 	    if (
-	      prev.has(StasReferences.RTCIceCandidatePairs.key) &&
+	      prev.has(RTCStatsReferences.RTCIceCandidatePairs.key) &&
 	      prev
-	        .get(StasReferences.RTCIceCandidatePairs.key)
+	        .get(RTCStatsReferences.RTCIceCandidatePairs.key)
 	        .some(stat => stat.nominated)
 	    ) {
 	      const previous = {
 	        RTCIceCandidatePairStats: prev
-	          .get(StasReferences.RTCIceCandidatePairs.key)
+	          .get(RTCStatsReferences.RTCIceCandidatePairs.key)
 	          .find(stat => stat.nominated)
 	      };
 
@@ -2033,9 +2033,9 @@
 	exports.ChromeRTCStatsReport = ChromeRTCStatsReport;
 	exports.FirefoxRTCStatsReport = FirefoxRTCStatsReport;
 	exports.RTCStatsMoment = RTCStatsMoment;
+	exports.RTCStatsReferenceMap = RTCStatsReferenceMap;
+	exports.RTCStatsReferences = RTCStatsReferences;
 	exports.SafariRTCStatsReport = SafariRTCStatsReport;
-	exports.StasReferences = StasReferences;
-	exports.StatsReferenceMap = StatsReferenceMap;
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 
