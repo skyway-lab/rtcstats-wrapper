@@ -1,4 +1,7 @@
-import { RTCStatsReferences, RTCStatsReferenceMap } from "../shared/constatnts.js";
+import {
+  RTCStatsReferences,
+  RTCStatsReferenceMap
+} from "../shared/constatnts.js";
 
 export class BaseRTCStatsReport {
   constructor(originalReport) {
