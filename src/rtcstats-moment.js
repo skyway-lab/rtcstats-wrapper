@@ -1,8 +1,4 @@
-import { detect } from "detect-browser";
-import { ChromeRTCStatsReport } from "./standardizers/chrome.js";
-import { FirefoxRTCStatsReport } from "./standardizers/firefox.js";
-import { SafariRTCStatsReport } from "./standardizers/safari.js";
-import { BaseRTCStatsReport } from "./standardizers/base.js";
+import { getStandardizer } from "./standardize-support.js";
 import { RTCStatsReferences } from "./shared/constatnts.js";
 
 function getVideoSenderStats(last, prev) {
@@ -85,7 +81,9 @@ function getAudioSenderStats(last, prev) {
 
   if (last.has(RTCStatsReferences.RTCAudioSenders.key)) {
     // While we only support single-track stream, this method only care about 1 transceiver.
-    const RTCAudioSenderStats = last.get(RTCStatsReferences.RTCAudioSenders.key)[0];
+    const RTCAudioSenderStats = last.get(
+      RTCStatsReferences.RTCAudioSenders.key
+    )[0];
     stats.audioLevel = RTCAudioSenderStats.audioLevel;
   }
 
@@ -144,7 +142,9 @@ function getVideoReceiverStats(last, prev) {
 
     if (prev.has(RTCStatsReferences.RTCVideoReceivers.key)) {
       const previous = {
-        RTCVideoReceiverStats: prev.get(RTCStatsReferences.RTCVideoReceivers.key)[0]
+        RTCVideoReceiverStats: prev.get(
+          RTCStatsReferences.RTCVideoReceivers.key
+        )[0]
       };
 
       if (
@@ -375,23 +375,7 @@ function getCandidatePairStats(last, prev) {
 
 export class RTCStatsMoment {
   constructor() {
-    const { name, version } = detect();
-    const [major, minor, patch] = version.split(".").map(n => parseInt(n));
-    const browser = { name, major, minor, patch };
-
-    switch (browser.name) {
-      case "chrome":
-        this.standardizer = ChromeRTCStatsReport;
-        break;
-      case "firefox":
-        this.standardizer = FirefoxRTCStatsReport;
-        break;
-      case "safari":
-        this.standardizer = SafariRTCStatsReport;
-        break;
-      default:
-        this.standardizer = BaseRTCStatsReport;
-    }
+    this.standardizer = getStandardizer();
 
     this._report = {
       prev: new Map(),
