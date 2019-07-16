@@ -1,0 +1,23 @@
+{
+  "plugins": ["plugins/markdown"],
+  "source": {
+    "include": ["src"],
+    "exclude": [],
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  },
+  "opts": {
+    "readme": "./README.md",
+    "destination": "./docs/",
+    "recurse": true,
+    "template": "node_modules/minami"
+  }
+}
