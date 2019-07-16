@@ -373,7 +373,194 @@ function getCandidatePairStats(last, prev) {
   return stats;
 }
 
+/**
+ * @typedef {Object} MomentaryReport
+ * @property {SendReport} send - A report about sending video and audio.
+ * @property {ReceiveReport} receive - A report about receiving video and audio.
+ * @property {CandidatePairReport} candidateType - A report about candidate pair which is nominated at this moment.
+ * @example
+ * {
+ *   send: {
+ *     video: {
+ *       jitter: 0.008,
+ *       rtt: 0.002,
+ *       averageEncodeTime: 0.0026,
+ *       qpValue: 5.5,
+ *       bitrate: 550092.0485312309
+ *     },
+ *     audio: {
+ *       jitter: 0.0078,
+ *       rtt: 0.001,
+ *       bitrate: 37708.31230270733
+ *     }
+ *   },
+ *   receive: {
+ *     video: {
+ *       jitterBufferDelay: 0.12,
+ *       fractionLost: 0,
+ *       qpValue: 19.8,
+ *       bitrate: 814766.8777838446
+ *     },
+ *     audio: {
+ *       audioLevel: 0.0096,
+ *       jitterBufferDelay: 0.11183673469387359,
+ *       fractionLost: 0,
+ *       bitrate: 37136.608229785656
+ *     }
+ *   },
+ *   candidatePair: {
+ *     rtt: 0.002,
+ *     upstreamBitrate: 606239.8302281727,
+ *     downstreamBitrate: 872903.5454809506
+ *   }
+ * }
+ */
+
+/**
+ * @typedef {Object} SendReport
+ * @property {SendVideoReport} video - A report about sending video.
+ * @property {SendAudioReport} audio - A report about sending audio.
+ * @example
+ * {
+ *   video: {
+ *     jitter: 0.008,
+ *     rtt: 0.002,
+ *     averageEncodeTime: 0.0026,
+ *     qpValue: 5.5,
+ *     bitrate: 550092.0485312309
+ *   },
+ *   audio: {
+ *     jitter: 0.0078,
+ *     rtt: 0.001,
+ *     bitrate: 37708.31230270733
+ *   }
+ * }
+ */
+
+/**
+ * @typedef {Object} SendVideoReport
+ * @property {Number} jitter - A jitter in seconds given in RR.
+ * @property {Number} rtt - An rtt in seconds given in RR.
+ * @property {Number} averageEncodeTime - Estimated average encode time in milliseconds.
+ * @property {Number} qpValue - Estimated QP(quantize parameter) value.
+ * @property {Number} bitrate - Estimated bit/sec about sending video.
+ * @example
+ * {
+ *   jitter: 0.008,
+ *   rtt: 0.002,
+ *   averageEncodeTime: 0.0026,
+ *   qpValue: 5.5,
+ *   bitrate: 550092.0485312309
+ * }
+ */
+
+/**
+ * @typedef {Object} SendAudioReport
+ * @property {Number} jitter - A jitter in seconds given in RR.
+ * @property {Number} rtt - An rtt in seconds given in RR.
+ * @property {Number} bitrate - Estimated bit/sec about sending audio.
+ * @example
+ * {
+ *   jitter: 0.0078,
+ *   rtt: 0.001,
+ *   bitrate: 37708.31230270733
+ * }
+ */
+
+/**
+ * @typedef {Object} ReceiveReport
+ * @property {ReceiveVideoReport} video - A report about receiving video.
+ * @property {ReceiveAudioReport} audio - A report about receiving audio.
+ * @example
+ * {
+ *   video: {
+ *     jitterBufferDelay: 0.12,
+ *     fractionLost: 0,
+ *     qpValue: 19.8,
+ *     bitrate: 814766.8777838446
+ *   },
+ *   audio: {
+ *     audioLevel: 0.0096,
+ *     jitterBufferDelay: 0.11183673469387359,
+ *     fractionLost: 0,
+ *     bitrate: 37136.608229785656
+ *   }
+ * }
+ */
+
+/**
+ * @typedef {Object} ReceiveVideoReport
+ * @property {Number} jitterBufferDelay - Estimated delay from jitter buffer, measured in seconds.
+ * @property {Number} fractionLost - Estimated Rate of packet loss.
+ * @property {Number} qpValue - Estimated QP(quantize parameter) value.
+ * @property {Number} bitrate - Estimated bit/sec about receiving video.
+ * @example
+ * {
+ *   jitterBufferDelay: 0.12,
+ *   fractionLost: 0,
+ *   qpValue: 19.8,
+ *   bitrate: 814766.8777838446
+ * }
+ */
+
+/**
+ * @typedef {Object} ReceiveAudioReport
+ * @property {Number} audioLevel - The audio level of the receiving track.
+ * @property {Number} jitterBufferDelay - Estimated delay from jitter buffer, measured in seconds.
+ * @property {Number} fractionLost - Estimated Rate of packet loss.
+ * @property {Number} bitrate - Estimated bit/sec about receiving audio.
+ * @example
+ * {
+ *   audioLevel: 0.0096,
+ *   jitterBufferDelay: 0.11183673469387359,
+ *   fractionLost: 0,
+ *   bitrate: 37136.608229785656
+ * }
+ */
+
+/**
+ * @typedef {Object} CandidatePairReport
+ * @property {Number} rtt - An round-trip time in seconds computed from STUN connectivity checks.
+ * @property {Number} downstreamBitrate - Estimated bit/sec about receiving data.
+ * @property {Number} upstreamBitrate - Estimated bit/sec about sending data.
+ * @example
+ * {
+ *   rtt: 0.002,
+ *   upstreamBitrate: 606239.8302281727,
+ *   downstreamBitrate: 872903.5454809506
+ * }
+ */
+
+/**
+ * Class to get the momentary metrics based on the RTCStats.
+ *
+ * @see example application {@link https://github.com/skyway-lab/connection-status-viewer-example}
+ * @example
+ * import { RTCStatsMoment } from 'rtcstats-wrapper';
+ *
+ * const moment = new RTCStatsMoment();
+ *
+ * const report = await pc.getStats();
+ * moment.update(report);
+ * moment.report();
+ * //=> {
+ * //    "send": {
+ * //        "video": { ... },
+ * //        "audio": { ... },
+ * //    },
+ * //    "receive": {
+ * //        "video": { ... },
+ * //        "audio": { ... },
+ * //    },
+ * //    "candidatePair": { ... }
+ * //}
+ */
 export class RTCStatsMoment {
+  /**
+   * Create a RTCStatsMoment.
+   *
+   * @constructs
+   */
   constructor() {
     this.standardizer = getStandardizer();
 
@@ -383,11 +570,45 @@ export class RTCStatsMoment {
     };
   }
 
+  /**
+   * Update the report.
+   *
+   * @param {RTCStatsReport} report - original stats report from `(pc|sender|receiver).getStats()`.
+   * @example
+   * import { RTCStatsMoment } from 'rtcstats-wrapper';
+   *
+   * const moment = new RTCStatsMoment();
+   *
+   * const id = setInterval(() => {
+   *   const report = await pc.getStats();
+   *   moment.update(report);
+   * }, INTERVAL);
+   */
   update(report) {
     this._report.prev = this._report.last;
     this._report.last = new this.standardizer(report);
   }
 
+  /**
+   * Calculate the momentary value based on the updated value.
+   * MomentaryReport does not have attribute that can not be obtained.
+   *
+   * @return {MomentaryReport}
+   * @example
+   * import { RTCStatsMoment } from 'rtcstats-wrapper';
+   *
+   * const moment = new RTCStatsMoment();
+   *
+   * const receiver = pc.getReceivers().find(sender => sender.kind === "video");
+   * const report = receiver.getStats();
+   * moment.update(report);
+   * moment.report();
+   * //=> {
+   * //    "send": {
+   * //        "video": { ... },
+   * //    }
+   * //}
+   */
   report() {
     const { last, prev } = this._report;
     return {

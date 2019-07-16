@@ -1,6 +1,11 @@
 import { BaseRTCStatsReport } from "./base.js";
 import { RTCStatsReferences } from "../shared/constatnts.js";
 
+/**
+ * Wrapped RTCStatsReport class for Safari.
+ *
+ * @extends BaseRTCStatsReport
+ */
 export class SafariRTCStatsReport extends BaseRTCStatsReport {
   _getRTCStatsReference(stats) {
     switch (stats.type) {

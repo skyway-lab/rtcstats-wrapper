@@ -4,6 +4,13 @@ import {
   RTCStatsReferenceMap
 } from "../shared/constatnts.js";
 
+/**
+ * Get "<in|out>bound-rtp" stats since Firefox under v69 does not use stats-type
+ * "track" but "<in|out>bound-rtp" stats includes the values that can be
+ * considered as "track".
+ *
+ * @private
+ */
 function getTrackStatsOfFirefox(stats) {
   switch (stats.type) {
     case "inbound-rtp":
@@ -25,6 +32,11 @@ function getTrackStatsOfFirefox(stats) {
   }
 }
 
+/**
+ * Wrapped RTCStatsReport class for Firefox.
+ *
+ * @extends BaseRTCStatsReport
+ */
 export class FirefoxRTCStatsReport extends BaseRTCStatsReport {
   constructor(originalReport) {
     super(originalReport);
