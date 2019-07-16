@@ -20,7 +20,6 @@ Since the implementation of getStats varies between each browsers, you need a sh
 ```javascript
 import { standardizeReport, RTCStatsReferences } from 'rtcstats-wrapper';
 
-
 const pc = new RTCPeerConnection();
 //  ...
 
@@ -59,4 +58,4 @@ moment.report();
 ```
 
 ## API Reference
-wip.
+see [GitHub Pages](http://skyway-lab.github.io/rtcstats-wrapper).

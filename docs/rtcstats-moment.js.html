@@ -1,4 +1,45 @@
-import { getStandardizer } from "./standardize-support.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>rtcstats-moment.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="BaseRTCStatsReport.html">BaseRTCStatsReport</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseRTCStatsReport.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseRTCStatsReport.html#has">has</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="ChromeRTCStatsReport.html">ChromeRTCStatsReport</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ChromeRTCStatsReport.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ChromeRTCStatsReport.html#has">has</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="FirefoxRTCStatsReport.html">FirefoxRTCStatsReport</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="FirefoxRTCStatsReport.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="FirefoxRTCStatsReport.html#has">has</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="RTCStatsMoment.html">RTCStatsMoment</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="RTCStatsMoment.html#report">report</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="RTCStatsMoment.html#update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SafariRTCStatsReport.html">SafariRTCStatsReport</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SafariRTCStatsReport.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SafariRTCStatsReport.html#has">has</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#RTCStatsReferences">RTCStatsReferences</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#standardizeReport">standardizeReport</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">rtcstats-moment.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { getStandardizer } from "./standardize-support.js";
 import { RTCStatsReferences } from "./shared/constatnts.js";
 
 function getVideoSenderStats(last, prev) {
@@ -15,7 +56,7 @@ function getVideoSenderStats(last, prev) {
   }
 
   if (
-    last.has(RTCStatsReferences.RTCOutboundRtpVideoStreams.key) &&
+    last.has(RTCStatsReferences.RTCOutboundRtpVideoStreams.key) &amp;&amp;
     prev.has(RTCStatsReferences.RTCOutboundRtpVideoStreams.key)
   ) {
     // While we only support single-track stream, this method only care about 1 transceiver.
@@ -30,7 +71,7 @@ function getVideoSenderStats(last, prev) {
 
     // calculate averageEncodeTime
     if (
-      RTCOutboundRtpVideoStreamStats.totalEncodeTime !== null &&
+      RTCOutboundRtpVideoStreamStats.totalEncodeTime !== null &amp;&amp;
       RTCOutboundRtpVideoStreamStats.framesEncoded !== null
     ) {
       const encodeTimeDelta =
@@ -45,7 +86,7 @@ function getVideoSenderStats(last, prev) {
 
     // calculate QP value
     if (
-      RTCOutboundRtpVideoStreamStats.qpSum !== null &&
+      RTCOutboundRtpVideoStreamStats.qpSum !== null &amp;&amp;
       RTCOutboundRtpVideoStreamStats.framesEncoded !== null
     ) {
       const qpSumDelta =
@@ -97,7 +138,7 @@ function getAudioSenderStats(last, prev) {
   }
 
   if (
-    last.has(RTCStatsReferences.RTCOutboundRtpAudioStreams.key) &&
+    last.has(RTCStatsReferences.RTCOutboundRtpAudioStreams.key) &amp;&amp;
     prev.has(RTCStatsReferences.RTCOutboundRtpAudioStreams.key)
   ) {
     // While we only support single-track stream, this method only care about 1 transceiver.
@@ -132,7 +173,7 @@ function getVideoReceiverStats(last, prev) {
   const stats = {};
 
   if (
-    last.has(RTCStatsReferences.RTCVideoReceivers.key) &&
+    last.has(RTCStatsReferences.RTCVideoReceivers.key) &amp;&amp;
     prev.has(RTCStatsReferences.RTCVideoReceivers.key)
   ) {
     // While we only support single-track stream, this method only care about 1 transceiver.
@@ -148,7 +189,7 @@ function getVideoReceiverStats(last, prev) {
       };
 
       if (
-        RTCVideoReceiverStats.jitterBufferDelay !== null &&
+        RTCVideoReceiverStats.jitterBufferDelay !== null &amp;&amp;
         RTCVideoReceiverStats.jitterBufferEmittedCount !== null
       ) {
         const jitterBufferDelayDelta =
@@ -178,7 +219,7 @@ function getVideoReceiverStats(last, prev) {
 
       // calculate fractionLost
       if (
-        RTCInboundRtpVideoStreamStats.packetsLost !== null &&
+        RTCInboundRtpVideoStreamStats.packetsLost !== null &amp;&amp;
         RTCInboundRtpVideoStreamStats.packetsReceived !== null
       ) {
         const packetsLostDelta =
@@ -193,7 +234,7 @@ function getVideoReceiverStats(last, prev) {
 
       // calculate QP value
       if (
-        RTCInboundRtpVideoStreamStats.qpSum !== null &&
+        RTCInboundRtpVideoStreamStats.qpSum !== null &amp;&amp;
         RTCInboundRtpVideoStreamStats.framesDecoded !== null
       ) {
         const qpSumDelta =
@@ -249,7 +290,7 @@ function getAudioReceiverStats(last, prev) {
         };
 
         if (
-          RTCAudioReceiverStats.jitterBufferDelay !== null &&
+          RTCAudioReceiverStats.jitterBufferDelay !== null &amp;&amp;
           RTCAudioReceiverStats.jitterBufferEmittedCount !== null
         ) {
           const jitterBufferDelayDelta =
@@ -279,7 +320,7 @@ function getAudioReceiverStats(last, prev) {
 
       // calculate fractionLost
       if (
-        RTCInboundRtpAudioStreamStats.packetsLost !== null &&
+        RTCInboundRtpAudioStreamStats.packetsLost !== null &amp;&amp;
         RTCInboundRtpAudioStreamStats.packetsReceived !== null
       ) {
         const packetsLostDelta =
@@ -315,7 +356,7 @@ function getCandidatePairStats(last, prev) {
   const stats = {};
 
   if (
-    last.has(RTCStatsReferences.RTCIceCandidatePairs.key) &&
+    last.has(RTCStatsReferences.RTCIceCandidatePairs.key) &amp;&amp;
     last
       .get(RTCStatsReferences.RTCIceCandidatePairs.key)
       .some(stat => stat.nominated)
@@ -329,7 +370,7 @@ function getCandidatePairStats(last, prev) {
 
     // check if previous stats also has nominated candidate-pair
     if (
-      prev.has(RTCStatsReferences.RTCIceCandidatePairs.key) &&
+      prev.has(RTCStatsReferences.RTCIceCandidatePairs.key) &amp;&amp;
       prev
         .get(RTCStatsReferences.RTCIceCandidatePairs.key)
         .some(stat => stat.nominated)
@@ -624,3 +665,22 @@ export class RTCStatsMoment {
     };
   }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Tue Jul 16 2019 16:42:19 GMT+0900 (Japan Standard Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
