@@ -58,4 +58,4 @@ moment.report();
 ```
 
 ## API Reference
-see [GitHub Pages](http://skyway-lab.github.io/rtcstats-wrapper).
+see [GitHub Pages](http://skyway-lab.github.io/rtcstats-wrapper/).
