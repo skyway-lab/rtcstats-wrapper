@@ -279,7 +279,7 @@ describe("receive.video", () => {
         {
           ...base,
           packetsLost: 20,
-          packetsReceived: 120
+          packetsReceived: 100
         }
       ]
     ]);
@@ -291,7 +291,7 @@ describe("receive.video", () => {
     const report = moment.report();
 
     // asert
-    expect(report.receive.video).toMatchObject({ fractionLost: 0.1 });
+    expect(report.receive.video).toMatchObject({ fractionLost: 0.2 });
   });
 
   test("It calculates qpValue.", () => {
@@ -447,7 +447,7 @@ describe("receive.audio", () => {
         {
           ...base,
           packetsLost: 20,
-          packetsReceived: 120
+          packetsReceived: 100
         }
       ]
     ]);
@@ -459,7 +459,7 @@ describe("receive.audio", () => {
     const report = moment.report();
 
     // asert
-    expect(report.receive.audio).toMatchObject({ fractionLost: 0.1 });
+    expect(report.receive.audio).toMatchObject({ fractionLost: 0.2 });
   });
 
   test("It calculates bitrate.", () => {
