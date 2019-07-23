@@ -1,0 +1,1 @@
+window.__SKYWAY_KEY__ = "<YOUR_SKYWAY_KEY_HERE>";

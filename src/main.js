@@ -7,4 +7,9 @@ export {
   RTCStatsReferenceMap
 } from "./shared/constatnts.js";
 export { RTCStatsMoment } from "./rtcstats-moment.js";
+export {
+  RTCStatsInsight,
+  RTCStatsInsightEvents,
+  StatusLevels
+} from "./rtcstats-insight.js";
 export { standardizeReport } from "./standardize-support.js";

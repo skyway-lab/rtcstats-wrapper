@@ -119,7 +119,7 @@ class ConnectionStatus {
       within: 5,
       ...options
     };
-    this._sotre = {
+    this._store = {
       unstable: new Array(this._options.within).fill(null),
       critical: new Array(this._options.within).fill(null)
     };
@@ -343,25 +343,39 @@ export class RTCStatsInsight extends EventEmitter {
     return this._status;
   }
   _checkStatus(moment) {
-    const metrics = [];
+    const metrics = [
+      { direction: "send", kind: "audio", key: "rtt" },
+      { direction: "send", kind: "video", key: "rtt" },
+      { direction: "send", kind: "audio", key: "jitter" },
+      { direction: "send", kind: "video", key: "jitter" },
+      { direction: "receive", kind: "audio", key: "fractionLost" },
+      { direction: "receive", kind: "video", key: "fractionLost" },
+      { direction: "receive", kind: "audio", key: "jitterBufferDelay" },
+      { direction: "receive", kind: "video", key: "jitterBufferDelay" },
+      { direction: "candidatePair", key: "rtt" }
+    ];
 
     for (const { direction, kind, key } of metrics) {
-      if (moment[direction][kind].hasOwnProperty(key)) {
-        const eventKey = direction === "candidatePair" ? key : `${kind}-${key}`;
+      const stats =
+        direction === "candidatePair"
+          ? moment[direction]
+          : moment[direction][kind];
+      const eventKey = direction === "candidatePair" ? key : `${kind}-${key}`;
 
+      if (stats.hasOwnProperty(key)) {
         // Update the value and emit when the the level has been changed.
         const currentLevel = this._status[eventKey].level;
-        this._status[eventKey].check(
-          moment[direction][kind][key],
-          this._thresholds[eventKey]
-        );
+        this._status[eventKey].check(stats[key], this._thresholds[eventKey]);
 
-        if (this._status[eventKey].level !== currentLevel) {
-          const level = this._status[eventKey].level;
+        const updatedLevel = this._status[eventKey].level;
+        if (updatedLevel !== currentLevel) {
+          if (currentLevel === "unknown" && updatedLevel === "stable") continue;
+
           this.emit(eventKey, {
-            level,
-            threshold: this._thresholds[eventKey][level],
-            value: moment[direction][kind][key]
+            level: updatedLevel,
+            event: eventKey,
+            threshold: this._thresholds[eventKey][updatedLevel],
+            value: stats[key]
           });
         }
       }
