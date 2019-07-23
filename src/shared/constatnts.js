@@ -2,7 +2,7 @@ import Enum from "enum";
 
 /**
  * Represents an Item of an Enum.
- * @typedef {Object} EnumItem
+ * @typedef EnumItem
  * @property {String} key   The Enum key.
  * @property {Number} value The Enum value.
  * @see {@link https://github.com/adrai/enum}
@@ -48,6 +48,7 @@ import Enum from "enum";
  *
  * // get stats of incoming RTP stream
  * const recvVideoStats = report.get(RTCStatsReferences.RTCInboundRtpVideoStreams.key)
+ *
  * // get each log of inbound-rtp
  * for (const stats of recvVideoStats) {
  *   logger.info(JSON.stringify(stats));
