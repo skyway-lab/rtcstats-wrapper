@@ -12,7 +12,10 @@
   },
   "templates": {
     "cleverLinks": false,
-    "monospaceLinks": false
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": false
+    }
   },
   "opts": {
     "readme": "./README.md",
