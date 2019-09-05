@@ -1780,7 +1780,7 @@
 	 */
 	function standardizeReport(report) {
 	  const standardizer = getStandardizer();
-	  return standardizer(report);
+	  return new standardizer(report);
 	}
 
 	function getVideoSenderStats(last, prev) {
