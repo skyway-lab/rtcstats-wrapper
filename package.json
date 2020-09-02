@@ -25,7 +25,7 @@
     "docs": "jsdoc -c ./jsdoc.json"
   },
   "devDependencies": {
-    "bl": ">=0.9.5",
+    "bl": ">=3.0.1",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^5.0.0",
     "eslint-plugin-jest": "^22.7.0",
