@@ -1752,6 +1752,7 @@
 
 	  switch (browser.name) {
 	    case "chrome":
+	    case "edge-chromium":
 	      return ChromeRTCStatsReport;
 	    case "firefox":
 	      return FirefoxRTCStatsReport;
