@@ -1919,7 +1919,7 @@
 	  ) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
 
-	    // Trace data from above and ignore invalid stats.
+	    // Trace data from above and ignore invalid data.
 	    let RTCVideoReceiverStatsIndex = 0;
 	    const RTCVideoReceiverStatsList = last.get(RTCStatsReferences.RTCVideoReceivers.key);
 	    for (let i = 0; i < RTCVideoReceiverStatsList.length; ++i) {
@@ -1960,7 +1960,7 @@
 	  if (last.has(RTCStatsReferences.RTCInboundRtpVideoStreams.key)) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
 
-	    // Trace data from above and ignore invalid stats.
+	    // Trace data from above and ignore invalid data.
 	    let RTCInboundRtpVideoStreamStatsIndex = 0;
 	    const RTCInboundRtpVideoStreamStatsList = last.get(RTCStatsReferences.RTCInboundRtpVideoStreams.key);
 	    for (let i = 0; i < RTCInboundRtpVideoStreamStatsList.length; ++i) {
