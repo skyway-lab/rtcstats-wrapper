@@ -136,15 +136,27 @@ function getVideoReceiverStats(last, prev) {
     prev.has(RTCStatsReferences.RTCVideoReceivers.key)
   ) {
     // While we only support single-track stream, this method only care about 1 transceiver.
+
+    // Trace data from above and ignore invalid data.
+    let RTCVideoReceiverStatsIndex = 0;
+    const RTCVideoReceiverStatsList = last.get(RTCStatsReferences.RTCVideoReceivers.key);
+    for (let i = 0; i < RTCVideoReceiverStatsList.length; ++i) {
+      const s = RTCVideoReceiverStatsList[i];
+      if (s.jitterBufferEmittedCount) {
+        RTCVideoReceiverStatsIndex = i;
+        break;
+      }
+    }
+
     const RTCVideoReceiverStats = last.get(
       RTCStatsReferences.RTCVideoReceivers.key
-    )[0];
+    )[RTCVideoReceiverStatsIndex];
 
     if (prev.has(RTCStatsReferences.RTCVideoReceivers.key)) {
       const previous = {
         RTCVideoReceiverStats: prev.get(
           RTCStatsReferences.RTCVideoReceivers.key
-        )[0]
+        )[RTCVideoReceiverStatsIndex]
       };
 
       if (
@@ -165,9 +177,21 @@ function getVideoReceiverStats(last, prev) {
 
   if (last.has(RTCStatsReferences.RTCInboundRtpVideoStreams.key)) {
     // While we only support single-track stream, this method only care about 1 transceiver.
+
+    // Trace data from above and ignore invalid data.
+    let RTCInboundRtpVideoStreamStatsIndex = 0;
+    const RTCInboundRtpVideoStreamStatsList = last.get(RTCStatsReferences.RTCInboundRtpVideoStreams.key);
+    for (let i = 0; i < RTCInboundRtpVideoStreamStatsList.length; ++i) {
+      const s = RTCInboundRtpVideoStreamStatsList[i];
+      if (s.packetsReceived) {
+        RTCInboundRtpVideoStreamStatsIndex = i;
+        break;
+      }
+    }
+
     const RTCInboundRtpVideoStreamStats = last.get(
       RTCStatsReferences.RTCInboundRtpVideoStreams.key
-    )[0];
+    )[RTCInboundRtpVideoStreamStatsIndex];
 
     // calculate fractionLost
     if (
@@ -183,7 +207,7 @@ function getVideoReceiverStats(last, prev) {
       const previous = {
         RTCInboundRtpVideoStreamStats: prev.get(
           RTCStatsReferences.RTCInboundRtpVideoStreams.key
-        )[0]
+        )[RTCInboundRtpVideoStreamStatsIndex]
       };
 
       // calculate QP value

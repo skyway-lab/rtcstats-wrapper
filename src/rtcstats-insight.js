@@ -123,7 +123,6 @@ class ConnectionStatus {
       unstable: new Array(this._options.within).fill(null),
       critical: new Array(this._options.within).fill(null)
     };
-    this._level = StatusLevels.unknown.key;
   }
 
   get level() {
@@ -132,12 +131,12 @@ class ConnectionStatus {
     }
 
     const criticalCount = this._store.critical.filter(Boolean).length;
-    if (criticalCount > this._options.failCount) {
+    if (criticalCount >= this._options.failCount) {
       return StatusLevels.critical.key;
     }
 
-    const unstableCount = this._store.critical.filter(Boolean).length;
-    if (unstableCount > this._options.failCount) {
+    const unstableCount = this._store.unstable.filter(Boolean).length;
+    if (unstableCount >= this._options.failCount) {
       return StatusLevels.unstable.key;
     }
 
@@ -215,6 +214,15 @@ export class RTCStatsInsight extends EventEmitter {
         }),
       {}
     );
+    this.onUpdate = options.onUpdate || ((_) => {});
+  }
+
+  get status() {
+    return this._status;
+  }
+
+  get report() {
+    return this._moment.report();
   }
 
   /**
@@ -324,11 +332,12 @@ export class RTCStatsInsight extends EventEmitter {
      */
 
     this._intervalID = setInterval(async () => {
-      const report = await this._statsSrc.getStats();
-      this._moment.update(report);
+      const stats = await this._statsSrc.getStats();
+      this._moment.update(stats);
 
-      const momentum = this._moment.report();
-      this._checkStatus(momentum);
+      this._checkStatus(this.report);
+
+      this.onUpdate(this.report);
     }, this._interval);
   }
 
@@ -339,10 +348,7 @@ export class RTCStatsInsight extends EventEmitter {
     clearInterval(this._intervalID);
   }
 
-  get status() {
-    return this._status;
-  }
-  _checkStatus(moment) {
+  _checkStatus(report) {
     const metrics = [
       { direction: "send", kind: "audio", key: "rtt" },
       { direction: "send", kind: "video", key: "rtt" },
@@ -358,8 +364,8 @@ export class RTCStatsInsight extends EventEmitter {
     for (const { direction, kind, key } of metrics) {
       const stats =
         direction === "candidatePair"
-          ? moment[direction]
-          : moment[direction][kind];
+          ? report[direction]
+          : report[direction][kind];
       const eventKey = direction === "candidatePair" ? key : `${kind}-${key}`;
 
       if (stats.hasOwnProperty(key)) {
