@@ -3127,10 +3127,8 @@
 	    this._intervalID = setInterval(async () => {
 	      const stats = await this._statsSrc.getStats();
 	      this._moment.update(stats);
-
-	      this._checkStatus(this.report);
-
 	      this.onUpdate(this.report);
+	      this._checkStatus(this.report);
 	    }, this._interval);
 	  }
 
