@@ -744,7 +744,8 @@
 	  "RTCLocalIceCandidates",
 	  "RTCRemoteIceCandidates",
 	  "RTCCertificates",
-	  "RTCStunServerConnections"
+	  "RTCStunServerConnections",
+	  "Invalid"
 	]);
 
 	const RTCStatsReferenceMap = new Map([
@@ -1272,6 +1273,10 @@
 	      "totalResponsesReceived",
 	      "totalRoundTripTime"
 	    ]
+	  ],
+	  [
+	    RTCStatsReferences.Invalid.key,
+	    []
 	  ]
 	]);
 
@@ -1555,8 +1560,9 @@
 	          return RTCStatsReferences.RTCVideoSenders.key;
 	        } else if (stats.hasOwnProperty("audioLevel")) {
 	          return RTCStatsReferences.RTCAudioSenders.key;
+	        } else {
+	          return RTCStatsReferences.Invalid.key;
 	        }
-	        break;
 	      case "inbound-rtp":
 	        if (stats.mediaType === "video") {
 	          return RTCStatsReferences.RTCInboundRtpVideoStreams.key;
