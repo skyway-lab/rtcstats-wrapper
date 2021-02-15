@@ -79,7 +79,8 @@ export const RTCStatsReferences = new Enum([
   "RTCLocalIceCandidates",
   "RTCRemoteIceCandidates",
   "RTCCertificates",
-  "RTCStunServerConnections"
+  "RTCStunServerConnections",
+  "Invalid"
 ]);
 
 export const RTCStatsReferenceMap = new Map([
@@ -607,5 +608,9 @@ export const RTCStatsReferenceMap = new Map([
       "totalResponsesReceived",
       "totalRoundTripTime"
     ]
+  ],
+  [
+    RTCStatsReferences.Invalid.key,
+    []
   ]
 ]);

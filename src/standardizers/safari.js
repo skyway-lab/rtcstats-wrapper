@@ -18,8 +18,9 @@ export class SafariRTCStatsReport extends BaseRTCStatsReport {
           return RTCStatsReferences.RTCVideoSenders.key;
         } else if (stats.hasOwnProperty("audioLevel")) {
           return RTCStatsReferences.RTCAudioSenders.key;
+        } else {
+          return RTCStatsReferences.Invalid.key;
         }
-        break;
       case "inbound-rtp":
         if (stats.mediaType === "video") {
           return RTCStatsReferences.RTCInboundRtpVideoStreams.key;

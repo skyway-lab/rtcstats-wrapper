@@ -744,7 +744,8 @@
 	  "RTCLocalIceCandidates",
 	  "RTCRemoteIceCandidates",
 	  "RTCCertificates",
-	  "RTCStunServerConnections"
+	  "RTCStunServerConnections",
+	  "Invalid"
 	]);
 
 	const RTCStatsReferenceMap = new Map([
@@ -1272,6 +1273,10 @@
 	      "totalResponsesReceived",
 	      "totalRoundTripTime"
 	    ]
+	  ],
+	  [
+	    RTCStatsReferences.Invalid.key,
+	    []
 	  ]
 	]);
 
@@ -1555,8 +1560,9 @@
 	          return RTCStatsReferences.RTCVideoSenders.key;
 	        } else if (stats.hasOwnProperty("audioLevel")) {
 	          return RTCStatsReferences.RTCAudioSenders.key;
+	        } else {
+	          return RTCStatsReferences.Invalid.key;
 	        }
-	        break;
 	      case "inbound-rtp":
 	        if (stats.mediaType === "video") {
 	          return RTCStatsReferences.RTCInboundRtpVideoStreams.key;
@@ -1918,15 +1924,27 @@
 	    prev.has(RTCStatsReferences.RTCVideoReceivers.key)
 	  ) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
+
+	    // Trace data from above and ignore invalid data.
+	    let RTCVideoReceiverStatsIndex = 0;
+	    const RTCVideoReceiverStatsList = last.get(RTCStatsReferences.RTCVideoReceivers.key);
+	    for (let i = 0; i < RTCVideoReceiverStatsList.length; ++i) {
+	      const s = RTCVideoReceiverStatsList[i];
+	      if (s.jitterBufferEmittedCount) {
+	        RTCVideoReceiverStatsIndex = i;
+	        break;
+	      }
+	    }
+
 	    const RTCVideoReceiverStats = last.get(
 	      RTCStatsReferences.RTCVideoReceivers.key
-	    )[0];
+	    )[RTCVideoReceiverStatsIndex];
 
 	    if (prev.has(RTCStatsReferences.RTCVideoReceivers.key)) {
 	      const previous = {
 	        RTCVideoReceiverStats: prev.get(
 	          RTCStatsReferences.RTCVideoReceivers.key
-	        )[0]
+	        )[RTCVideoReceiverStatsIndex]
 	      };
 
 	      if (
@@ -1947,9 +1965,21 @@
 
 	  if (last.has(RTCStatsReferences.RTCInboundRtpVideoStreams.key)) {
 	    // While we only support single-track stream, this method only care about 1 transceiver.
+
+	    // Trace data from above and ignore invalid data.
+	    let RTCInboundRtpVideoStreamStatsIndex = 0;
+	    const RTCInboundRtpVideoStreamStatsList = last.get(RTCStatsReferences.RTCInboundRtpVideoStreams.key);
+	    for (let i = 0; i < RTCInboundRtpVideoStreamStatsList.length; ++i) {
+	      const s = RTCInboundRtpVideoStreamStatsList[i];
+	      if (s.packetsReceived) {
+	        RTCInboundRtpVideoStreamStatsIndex = i;
+	        break;
+	      }
+	    }
+
 	    const RTCInboundRtpVideoStreamStats = last.get(
 	      RTCStatsReferences.RTCInboundRtpVideoStreams.key
-	    )[0];
+	    )[RTCInboundRtpVideoStreamStatsIndex];
 
 	    // calculate fractionLost
 	    if (
@@ -1965,7 +1995,7 @@
 	      const previous = {
 	        RTCInboundRtpVideoStreamStats: prev.get(
 	          RTCStatsReferences.RTCInboundRtpVideoStreams.key
-	        )[0]
+	        )[RTCInboundRtpVideoStreamStatsIndex]
 	      };
 
 	      // calculate QP value
@@ -2886,7 +2916,6 @@
 	      unstable: new Array(this._options.within).fill(null),
 	      critical: new Array(this._options.within).fill(null)
 	    };
-	    this._level = StatusLevels.unknown.key;
 	  }
 
 	  get level() {
@@ -2895,12 +2924,12 @@
 	    }
 
 	    const criticalCount = this._store.critical.filter(Boolean).length;
-	    if (criticalCount > this._options.failCount) {
+	    if (criticalCount >= this._options.failCount) {
 	      return StatusLevels.critical.key;
 	    }
 
-	    const unstableCount = this._store.critical.filter(Boolean).length;
-	    if (unstableCount > this._options.failCount) {
+	    const unstableCount = this._store.unstable.filter(Boolean).length;
+	    if (unstableCount >= this._options.failCount) {
 	      return StatusLevels.unstable.key;
 	    }
 
@@ -2978,6 +3007,15 @@
 	        }),
 	      {}
 	    );
+	    this.onUpdate = options.onUpdate || ((_) => {});
+	  }
+
+	  get status() {
+	    return this._status;
+	  }
+
+	  get report() {
+	    return this._moment.report();
 	  }
 
 	  /**
@@ -3087,11 +3125,10 @@
 	     */
 
 	    this._intervalID = setInterval(async () => {
-	      const report = await this._statsSrc.getStats();
-	      this._moment.update(report);
-
-	      const momentum = this._moment.report();
-	      this._checkStatus(momentum);
+	      const stats = await this._statsSrc.getStats();
+	      this._moment.update(stats);
+	      this.onUpdate(this.report);
+	      this._checkStatus(this.report);
 	    }, this._interval);
 	  }
 
@@ -3102,10 +3139,7 @@
 	    clearInterval(this._intervalID);
 	  }
 
-	  get status() {
-	    return this._status;
-	  }
-	  _checkStatus(moment) {
+	  _checkStatus(report) {
 	    const metrics = [
 	      { direction: "send", kind: "audio", key: "rtt" },
 	      { direction: "send", kind: "video", key: "rtt" },
@@ -3121,8 +3155,8 @@
 	    for (const { direction, kind, key } of metrics) {
 	      const stats =
 	        direction === "candidatePair"
-	          ? moment[direction]
-	          : moment[direction][kind];
+	          ? report[direction]
+	          : report[direction][kind];
 	      const eventKey = direction === "candidatePair" ? key : `${kind}-${key}`;
 
 	      if (stats.hasOwnProperty(key)) {
